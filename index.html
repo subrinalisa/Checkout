@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- Title -->
+    <title>Form</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="assets/images/logo/favicon.png">
+    <!-- Bootstrap Stylesheet -->
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <!-- Icons -->
+    <link rel="stylesheet" href="assets/icon-fontawesome/css/all.css">
+    <link rel="stylesheet" href="assets/icon-bootstrap/bootstrap-icons.css">
+    <!-- Scrollup Plugin -->
+    <link rel="stylesheet" href="assets/vendor/tab.css">
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body>
+    <!-- ========= Preloader ========= -->
+    <div id="preloader">
+        <div class="loader-wrap">
+            <div class="loader">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        </div>
+    </div>
+    <!-- ========= Header ========= -->
+    <header>
+        <div class="container">
+            <div class="row form-wrapper">
+                <div class="col-lg-7">
+                    <div class="card border-0">
+                        <div class="card-body">
+                            <form action="#" method="post" id="main-form">
+                                <!-- Shipping Information -->
+                                <fieldset id="shippingInfo">
+                                    <legend>Shipping Information</legend>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-floating mb-3">
+                                                <input type="text" class="form-control" placeholder="Name"
+                                                    id="shippingName">
+                                                <label>Name</label>
+                                                <div class="invalid-feedback"></div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-floating mb-3">
+                                                <input type="email" class="form-control" placeholder="Email"
+                                                    id="shippingEmail">
+                                                <label>Email</label>
+                                                <div class="invalid-feedback"></div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-floating mb-3">
+                                                <input type="text" class="form-control" placeholder="Country"
+                                                    id="shippingCountry">
+                                                <label>Country</label>
+                                                <div class="invalid-feedback"></div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-floating mb-3">
+                                                <input type="text" class="form-control" placeholder="Zip Code"
+                                                    id="shippingZip">
+                                                <label>Zip Code</label>
+                                                <div class="invalid-feedback"></div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-floating mb-3">
+                                                <input type="password" class="form-control" placeholder="Password"
+                                                    id="password">
+                                                <label>Password</label>
+                                                <div class="invalid-feedback"></div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-floating mb-3">
+                                                <input type="password" class="form-control"
+                                                    placeholder="Confirm Password" id="cPassword">
+                                                <label>Confirm Password</label>
+                                                <div class="invalid-feedback"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                                <!-- Billing Information -->
+                                <fieldset id="billingInfo">
+                                    <legend>Billing Information</legend>
+                                    <div class="row">
+                                        <div class="col-md-12 mb-3">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="checkbox"
+                                                    onclick="billingFunction()">
+                                                <label class="form-check-label" for="checkbox">
+                                                    Same as shipping address
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-floating mb-3">
+                                                <input type="text" class="form-control" placeholder="Name"
+                                                    id="billingName">
+                                                <label>Name</label>
+                                                <div class="invalid-feedback"></div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-floating mb-3">
+                                                <input type="text" class="form-control" placeholder="Zip Code"
+                                                    id="billingZip">
+                                                <label>Zip Code</label>
+                                                <div class="invalid-feedback"></div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <button class="btn btn-danger" type="submit">Submit</button>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-5 align-self-center d-none d-lg-block">
+                    <div class="form-image">
+                        <img src="./assets/images/form.png" class="img-fluid" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- ========= Footer ========= -->
+    <footer></footer>
+    <!-- ========= Js Files ========= -->
+    <!-- Jquery Js -->
+    <script src="assets/js/jquery-1.12.4.js"></script>
+    <!-- Popper Js -->
+    <script src="assets/js/popper.min.js"></script>
+    <!-- Bootstrap Js -->
+    <script src="assets/js/bootstrap.min.js"></script>
+    <!-- Scrollup Plugin -->
+    <script src="assets/vendor/scroll-up.min.js"></script>
+    <!-- Custom Js -->
+    <script src="assets/js/custom.js"></script>
+    <script src="assets/js/app.js"></script>
+</body>
+
+</html>
