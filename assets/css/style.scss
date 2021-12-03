@@ -276,7 +276,9 @@ header {
         border: 1px solid $red-color;
         background: url(./warning.svg) 95% 50% no-repeat;
     }
-    .form-control:disabled, .form-control[readonly]{
+
+    .form-control:disabled,
+    .form-control[readonly] {
         background: #e9ecef;
     }
 }
@@ -286,7 +288,9 @@ header {
         border: 1px solid $green-color;
         background: url(./check.svg) 95% 50% no-repeat;
     }
-    .form-control:disabled, .form-control[readonly]{
+
+    .form-control:disabled,
+    .form-control[readonly] {
         background: #e9ecef;
     }
 }

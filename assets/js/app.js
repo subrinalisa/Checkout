@@ -15,12 +15,17 @@ const shippingInfo = document.querySelector('#shippingInfo');
 // Submit Form
 form.addEventListener('submit', function (e) {
     e.preventDefault();
-    stringValidation(shippingName, shippingName.value.trim());
-    shippingEmailValidation(shippingEmail, shippingEmail.value.trim());
-    stringValidation(shippingCountry, shippingCountry.value.trim());
-    shippingZipValidation(shippingZip, shippingZip.value.trim());
-    passwordValidation(password, password.value.trim());
-    cPasswordValidation(password, cPassword);
+    const sName = stringValidation(shippingName, shippingName.value.trim());
+    const sEmail = shippingEmailValidation(shippingEmail, shippingEmail.value.trim());
+    const sCountry = stringValidation(shippingCountry, shippingCountry.value.trim());
+    const sZip = shippingZipValidation(shippingZip, shippingZip.value.trim());
+    const sPw = passwordValidation(password, password.value.trim());
+    const sCpw = cPasswordValidation(password, cPassword);
+    const bName = stringValidation(billingName, billingName.value.trim());
+    const bZip = shippingZipValidation(billingZip, billingZip.value.trim());
+    if (sName && sEmail && sCountry && sZip && sPw && sCpw && bName && bZip) {
+        alert('Form Successfully Submitted');
+    }
 });
 
 // Display Error 
@@ -29,6 +34,7 @@ function displayError(element, message) {
     const feedback = element.parentNode.querySelector('.invalid-feedback');
     feedback.innerText = message;
     feedback.className = 'invalid-feedback d-block';
+    return false;
 }
 
 // Display Success
@@ -36,68 +42,69 @@ function displaySuccess(element) {
     element.parentNode.className = 'form-floating mb-3 form-success';
     element.parentNode.querySelector('.invalid-feedback').innerText = '';
     element.parentNode.querySelector('.invalid-feedback').className = 'invalid-feedback d-none';
+    return true;
 }
 
 // Shipping Name, Country Validation
 function stringValidation(name, value) {
     if (value == "") {
-        displayError(name, `Enter your ${name.placeholder.toLowerCase()}`);
+        return displayError(name, `Enter your ${name.placeholder.toLowerCase()}`);
     } else if (!value.match(/[A-Za-z]/)) {
-        displayError(name, `Enter your valid ${name.placeholder.toLowerCase()}`);
+        return displayError(name, `Enter your valid ${name.placeholder.toLowerCase()}`);
     } else {
-        displaySuccess(name);
+        return displaySuccess(name);
     }
 }
 
 // Email Validation
 function shippingEmailValidation(email, value) {
     if (value == "") {
-        displayError(email, `Enter an email id`);
+        return displayError(email, `Enter an email id`);
     } else if (!value.match(/\S+@\S+\.\S/)) {
-        displayError(email, `Enter valid email id`);
+        return displayError(email, `Enter valid email id`);
     } else {
-        displaySuccess(email);
+        return displaySuccess(email);
     }
 }
 
 // Shipping Zip Validation
 function shippingZipValidation(zip, value) {
     if (value == "") {
-        displayError(zip, `Enter your zip code`);
+        return displayError(zip, `Enter your zip code`);
     } else if (!value.match(/[0-9]/)) {
-        displayError(zip, `Enter valid zip code`);
+        return displayError(zip, `Enter valid zip code`);
     } else if (value.length != 5) {
-        displayError(zip, `Must be 5 digit`);
+        return displayError(zip, `Must be 5 digit`);
     } else {
-        displaySuccess(zip)
+        return displaySuccess(zip)
     }
 }
 
 // Password Validation
 function passwordValidation(password, value) {
     if (value == "") {
-        displayError(password, `Enter your password`);
+        return displayError(password, `Enter your password`);
     } else if (!value.match(/^(?=.*[A-Z])/)) {
-        displayError(password, `One uppercase letter is required`);
+        return displayError(password, `One uppercase letter is required`);
     } else if (!value.match(/^(?=.*\d)/)) {
-        displayError(password, `One digit is required`);
+        return displayError(password, `One digit is required`);
     } else if (!value.match(/^(?=.*[@$!%*?&])/)) {
-        displayError(password, `One special character is required`);
+        return displayError(password, `One special character is required`);
     } else if (!value.match(/.{8,}/)) {
-        displayError(password, `At least 8 characters long`);
+        return displayError(password, `At least 8 characters long`);
     } else {
-        displaySuccess(password);
+        return displaySuccess(password);
     }
 }
 
 // Confirm Password Validation
 function cPasswordValidation(password, cPassword) {
     if (cPassword.value == "") {
-        displayError(cPassword, `Re-enter your password`);
+        return displayError(cPassword, `Re-enter your password`);
     } else if (password.value != cPassword.value) {
-        displayError(cPassword, `Passwords aren't matched`);
+        return displayError(cPassword, `Passwords aren't matched`);
     } else {
-        displaySuccess(cPassword);
+        return displaySuccess(cPassword);
     }
 }
 
@@ -105,23 +112,9 @@ function cPasswordValidation(password, cPassword) {
 function billingFunction() {
     const checkboxStatus = checkbox.checked;
     if (checkboxStatus) {
-        if (shippingName.value == "") {
-            stringValidation(shippingName, shippingName.value.trim());
-            shippingName.addEventListener('input', function (e) {
-                billingName.value = shippingName.value;
-            });
-        }
-        if (shippingZip.value == "") {
-            shippingZipValidation(shippingZip, shippingZip.value.trim());
-            shippingZip.addEventListener('input', function (e) {
-                billingZip.value = shippingZip.value;
-            });
-        }
-        if (shippingName.value != "" && shippingZip.value != "") {
-            shippingInfo.disabled = true;
-            billingName.value = shippingName.value;
-            billingZip.value = shippingZip.value;
-        }
+        shippingInfo.disabled = true;
+        billingName.value = shippingName.value;
+        billingZip.value = shippingZip.value;
     } else {
         shippingInfo.disabled = false;
         billingName.value = "";
