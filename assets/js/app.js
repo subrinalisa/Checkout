@@ -1,123 +1,159 @@
 'use strict';
-// Fetching Dom Elements
+
 const form = document.querySelector('#main-form');
-const shippingName = document.querySelector('#shippingName');
-const shippingEmail = document.querySelector('#shippingEmail');
-const shippingCountry = document.querySelector('#shippingCountry');
-const shippingZip = document.querySelector('#shippingZip');
+const sName = document.querySelector('#sName');
+const bName = document.querySelector('#bName');
+const sEmail = document.querySelector('#sEmail');
+const sAddress = document.querySelector('#sAddress');
+const bAddress = document.querySelector('#bAddress');
+const sCity = document.querySelector('#sCity');
+const bCity = document.querySelector('#bCity');
+const sZip = document.querySelector('#sZip');
+const sPhn = document.querySelector('#sPhn');
+const bPhn = document.querySelector('#bPhn');
 const password = document.querySelector('#password');
 const cPassword = document.querySelector('#cPassword');
-const billingName = document.querySelector('#billingName');
-const billingZip = document.querySelector('#billingZip');
-const checkbox = document.querySelector('#checkbox');
-const shippingInfo = document.querySelector('#shippingInfo');
+const modal = document.querySelector('.modal');
 
-// Submit Form
-form.addEventListener('submit', function (e) {
+// Form Submit
+form.addEventListener('submit', (e) => {
     e.preventDefault();
-    const sName = stringValidation(shippingName, shippingName.value.trim());
-    const sEmail = shippingEmailValidation(shippingEmail, shippingEmail.value.trim());
-    const sCountry = stringValidation(shippingCountry, shippingCountry.value.trim());
-    const sZip = shippingZipValidation(shippingZip, shippingZip.value.trim());
-    const sPw = passwordValidation(password, password.value.trim());
-    const sCpw = cPasswordValidation(password, cPassword);
-    const bName = stringValidation(billingName, billingName.value.trim());
-    const bZip = shippingZipValidation(billingZip, billingZip.value.trim());
-    if (sName && sEmail && sCountry && sZip && sPw && sCpw && bName && bZip) {
-        alert('Form Successfully Submitted');
+    const sNameV = nameValidation(sName, sName.value.trim());
+    const bNameV = nameValidation(bName, bName.value.trim());
+    const sEmailV = checkEmpty(sEmail, sEmail.value.trim());
+    const sAddressV = checkEmpty(sAddress, sAddress.value);
+    const bAddressV = checkEmpty(bAddress, bAddress.value);
+    const sCityV = checkEmpty(sCity, sCity.value);
+    const bCityV = checkEmpty(bCity, bCity.value);
+    const sZipV = zipValidation(sZip, sZip.value.trim());
+    const sPhnV = phnValidation(sPhn, sPhn.value);
+    const bPhnV = phnValidation(bPhn, bPhn.value);
+    const pwV = pwValidation(password, password.value);
+    const cpwV = cPwValidation(cPassword, cPassword.value);
+
+    if (sNameV && bNameV && sEmailV && sAddressV && bAddressV && sCityV && bCityV && sZipV && sPhnV && bPhnV && pwV && cpwV) {
+        modal.style.display = 'block';
+    } else {
+        modal.style.display = 'none';
     }
 });
 
-// Display Error 
-function displayError(element, message) {
-    element.parentNode.className = 'form-floating mb-3 form-error';
-    const feedback = element.parentNode.querySelector('.invalid-feedback');
-    feedback.innerText = message;
-    feedback.className = 'invalid-feedback d-block';
-    return false;
-}
-
-// Display Success
-function displaySuccess(element) {
-    element.parentNode.className = 'form-floating mb-3 form-success';
-    element.parentNode.querySelector('.invalid-feedback').innerText = '';
-    element.parentNode.querySelector('.invalid-feedback').className = 'invalid-feedback d-none';
-    return true;
-}
-
-// Shipping Name, Country Validation
-function stringValidation(name, value) {
-    if (value == "") {
-        return displayError(name, `Enter your ${name.placeholder.toLowerCase()}`);
-    } else if (!value.match(/[A-Za-z]/)) {
-        return displayError(name, `Enter your valid ${name.placeholder.toLowerCase()}`);
+// Name Validation
+const nameValidation = (element, value) => {
+    if (checkEmpty(element, value)) {
+        if (!value.match(/[A-Za-z]\s*$/)) {
+            return displayError(element, `Only alphabets`);
+        } else {
+            return true;
+        }
     } else {
-        return displaySuccess(name);
+        return false;
     }
 }
 
-// Email Validation
-function shippingEmailValidation(email, value) {
-    if (value == "") {
-        return displayError(email, `Enter an email id`);
-    } else if (!value.match(/\S+@\S+\.\S/)) {
-        return displayError(email, `Enter valid email id`);
+// Zip code Validation
+const zipValidation = (element, value) => {
+    if (checkEmpty(element, value)) {
+        if (!value.match(/^\d{4,4}$/)) {
+            return displayError(element, `Only digits & length should be 4`);
+        } else {
+            return true;
+        }
     } else {
-        return displaySuccess(email);
+        return false;
     }
 }
 
-// Shipping Zip Validation
-function shippingZipValidation(zip, value) {
-    if (value == "") {
-        return displayError(zip, `Enter your zip code`);
-    } else if (!value.match(/[0-9]/)) {
-        return displayError(zip, `Enter valid zip code`);
-    } else if (value.length != 5) {
-        return displayError(zip, `Must be 5 digit`);
+// Phone Validation
+const phnValidation = (element, value) => {
+    if (checkEmpty(element, value)) {
+        if (value.length != 18) {
+            return displayError(element, `Enter 12 digits mobile no`);
+        } else {
+            return true;
+        }
     } else {
-        return displaySuccess(zip)
+        return false;
     }
 }
 
 // Password Validation
-function passwordValidation(password, value) {
-    if (value == "") {
-        return displayError(password, `Enter your password`);
-    } else if (!value.match(/^(?=.*[A-Z])/)) {
-        return displayError(password, `One uppercase letter is required`);
-    } else if (!value.match(/^(?=.*\d)/)) {
-        return displayError(password, `One digit is required`);
-    } else if (!value.match(/^(?=.*[@$!%*?&])/)) {
-        return displayError(password, `One special character is required`);
-    } else if (!value.match(/.{8,}/)) {
-        return displayError(password, `At least 8 characters long`);
+const pwValidation = (element, value) => {
+    if (checkEmpty(element, value)) {
+        if ((!value.match(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,20}$/))) {
+            return displayError(element, `Password should have at least one letter, one number, one special character & length should be within 8 to 20 characters`);
+        } else {
+            return true;
+        }
     } else {
-        return displaySuccess(password);
+        return false;
     }
 }
 
 // Confirm Password Validation
-function cPasswordValidation(password, cPassword) {
-    if (cPassword.value == "") {
-        return displayError(cPassword, `Re-enter your password`);
-    } else if (password.value != cPassword.value) {
-        return displayError(cPassword, `Passwords aren't matched`);
+const cPwValidation = (element, value) => {
+    if (checkEmpty(element, value)) {
+        if (value != password.value) {
+            return displayError(element, `Password didn't match`);
+        } else {
+            return true;
+        }
     } else {
-        return displaySuccess(cPassword);
+        return false;
     }
 }
 
+// Check Empty input
+const checkEmpty = (element, value) => {
+    if (value == "") {
+        return displayError(element, `Enter your ${element.name}`);
+    } else {
+        return displaySuccess(element);
+    }
+}
+
+// Display Error 
+const displayError = (element, message) => {
+    feedbackMessage(element, message, `form-floating mb-3 form-error`, `invalid-feedback d-block`);
+    return false;
+}
+
+// Display Success
+const displaySuccess = (element) => {
+    feedbackMessage(element, '', `form-floating mb-3 form-success`, `invalid-feedback d-none`);
+    return true;
+}
+
+// Feedback
+const feedbackMessage = (element, message, feedbackParentClass, feedbackClass) => {
+    element.parentNode.className = feedbackParentClass;
+    const feedback = element.parentNode.querySelector('.invalid-feedback');
+    feedback.innerText = message;
+    feedback.className = feedbackClass;
+}
+
 // Billing Function
-function billingFunction() {
-    const checkboxStatus = checkbox.checked;
-    if (checkboxStatus) {
+const billingFunction = () => {
+    const checkStatus = checkbox.checked;
+    if (checkStatus) {
         shippingInfo.disabled = true;
-        billingName.value = shippingName.value;
-        billingZip.value = shippingZip.value;
+        bName.disabled = true;
+        bAddress.disabled = true;
+        bCity.disabled = true;
+        bPhn.disabled = true;
+        bName.value = sName.value;
+        bAddress.value = sAddress.value;
+        bCity.value = sCity.value;
+        bPhn.value = sPhn.value;
     } else {
         shippingInfo.disabled = false;
-        billingName.value = "";
-        billingZip.value = "";
+        bName.disabled = false;
+        bAddress.disabled = false;
+        bCity.disabled = false;
+        bPhn.disabled = false;
+        bName.value = "";
+        bAddress.value = "";
+        bCity.value = "";
+        bPhn.value = "";
     }
 }

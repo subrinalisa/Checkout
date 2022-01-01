@@ -272,25 +272,31 @@ header {
 }
 
 .form-error {
-    .form-control {
+
+    .form-control,
+    .form-select {
         border: 1px solid $red-color;
         background: url(./warning.svg) 95% 50% no-repeat;
     }
 
     .form-control:disabled,
-    .form-control[readonly] {
+    .form-control[readonly],
+    .form-select:disabled {
         background: #e9ecef;
     }
 }
 
 .form-success {
-    .form-control {
+
+    .form-control,
+    .form-select {
         border: 1px solid $green-color;
         background: url(./check.svg) 95% 50% no-repeat;
     }
 
     .form-control:disabled,
-    .form-control[readonly] {
+    .form-control[readonly],
+    .form-select:disabled {
         background: #e9ecef;
     }
 }
@@ -300,5 +306,73 @@ header {
         legend {
             font-size: 18px;
         }
+    }
+}
+
+.form-image {
+    img {
+        animation: floating 2s ease infinite alternate;
+    }
+}
+
+@keyframes floating {
+    0% {
+        opacity: 1;
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-10px);
+        -webkit-transform: translateY(-10px);
+        -moz-transform: translateY(-10px);
+        -ms-transform: translateY(-10px);
+        -o-transform: translateY(-10px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0px);
+    }
+}
+
+.modal {
+    .modal-content {
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+        border: 1px solid $green-color;
+    }
+
+    .btn-close {
+        position: absolute;
+        top: 5px;
+        right: 5px;
+    }
+
+    .modal-body {
+        text-align: center;
+        padding: 30px 16px;
+
+        img {
+            margin-bottom: 16px;
+            animation: scale-in-center 1s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+            -webkit-animation: scale-in-center 1s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+        }
+
+        p {
+            @include fonts(20px, 600, $green-color);
+        }
+    }
+}
+
+@keyframes scale-in-center {
+    0% {
+        -webkit-transform: scale(0);
+        transform: scale(0);
+        opacity: 1;
+    }
+
+    100% {
+        -webkit-transform: scale(1);
+        transform: scale(1);
+        opacity: 1;
     }
 }

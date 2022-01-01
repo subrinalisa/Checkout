@@ -5,14 +5,7 @@
         jQuery("#preloader").delay(500).fadeOut(500);
         jQuery(".loader-wrap").fadeOut(500);
     });
-    // Scrollup
-    $(function () {
-        $.scrollUp({
-            scrollName: 'scrollUp',
-            scrollText: 'Up',
-            activeOverlay: false
-        });
-    });
+    
     // Restrict Inspect
     document.onkeydown = function (e) {
         if (e.ctrlKey &&
