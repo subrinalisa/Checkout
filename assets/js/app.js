@@ -14,6 +14,7 @@ const bPhn = document.querySelector('#bPhn');
 const password = document.querySelector('#password');
 const cPassword = document.querySelector('#cPassword');
 const modal = document.querySelector('.modal');
+const btnClose = document.querySelector('.btn-close');
 
 // Form Submit
 form.addEventListener('submit', (e) => {
@@ -157,3 +158,8 @@ const billingFunction = () => {
         bPhn.value = "";
     }
 }
+
+// Modal Close
+btnClose.addEventListener('click', (e) => {
+    modal.style.display = 'none';
+});
