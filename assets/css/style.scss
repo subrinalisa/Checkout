@@ -309,32 +309,6 @@ header {
     }
 }
 
-.form-image {
-    img {
-        animation: floating 2s ease infinite alternate;
-    }
-}
-
-@keyframes floating {
-    0% {
-        opacity: 1;
-        transform: translateY(0px);
-    }
-
-    50% {
-        transform: translateY(-10px);
-        -webkit-transform: translateY(-10px);
-        -moz-transform: translateY(-10px);
-        -ms-transform: translateY(-10px);
-        -o-transform: translateY(-10px);
-    }
-
-    100% {
-        opacity: 1;
-        transform: translateY(0px);
-    }
-}
-
 .modal {
     @include transition();
 
