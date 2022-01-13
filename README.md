@@ -12,7 +12,7 @@
     <li>Open the index.html file into the vs code</li>
     <li>Open the file into your live server & use the app</li>
 </ul>
-<h2>Live Link: <a href="https://subrinalisa.github.io/form/" style="font-size: 18px;">Form</a></h2>
+<h2>Live Link: <a href="https://subrinalisa.github.io/checkout-form/" style="font-size: 18px;">Form</a></h2>
 <h2>How to use the app</h2>
 <ul>
     <li>Enter your name, email, address, city, zip code, phone number, password & confirm password into the shipping
